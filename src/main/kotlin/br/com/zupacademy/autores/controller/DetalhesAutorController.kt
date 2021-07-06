@@ -15,8 +15,7 @@ class DetalhesAutorController(val autorRepository: AutorRepository) {
 
         if(email.isBlank()){
             val autores = autorRepository.findAll()
-            val resposta = autores.map(::DetalhesAutorResponse)
-            return HttpResponse.ok(resposta)
+            return HttpResponse.ok(autores.map{autor -> DetalhesAutorResponse(autor)})
         }
 
         val possivelAutor = autorRepository.findByEmail(email)
